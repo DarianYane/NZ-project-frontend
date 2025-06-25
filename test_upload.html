@@ -1,0 +1,505 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prueba de Subida de Audio</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #555;
+        }
+
+        input,
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #4CAF50;
+            outline: none;
+        }
+
+        .file-input {
+            border: 2px dashed #4CAF50;
+            padding: 20px;
+            text-align: center;
+            background-color: #f9f9f9;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .file-input:hover {
+            background-color: #e8f5e8;
+        }
+
+        .file-input.image-input {
+            border-color: #2196F3;
+        }
+
+        .file-input.image-input:hover {
+            background-color: #e3f2fd;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        button:hover {
+            background-color: #45a049;
+        }
+
+        button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 5px;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .success {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+
+        .error {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+
+        .loading {
+            background-color: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+
+        .file-info {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            font-size: 14px;
+        }
+
+        .test-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .test-buttons button {
+            flex: 1;
+            margin-top: 0;
+        }
+
+        .status-check {
+            background-color: #007bff;
+        }
+
+        .status-check:hover {
+            background-color: #0056b3;
+        }
+
+        .image-preview {
+            margin-top: 10px;
+            max-width: 200px;
+            max-height: 200px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>🎵 Prueba de Subida de Audio</h1>
+
+        <div class="test-buttons">
+            <button onclick="checkServerStatus()" class="status-check">
+                Verificar Estado del Servidor
+            </button>
+            <button onclick="fillTestData()">
+                Llenar con Datos de Prueba
+            </button>
+        </div>
+
+        <form id="audioForm">
+            <div class="form-group">
+                <label for="nombre_comercio">Nombre del Comercio:</label>
+                <div style="font-size: 16px; color: #333; margin-top: 5px;">
+                    Restaurante La Plaza
+                </div>
+                <input type="hidden" id="nombre_comercio" name="nombre_comercio" value="Restaurante La Plaza">
+            </div>
+
+            <div class="form-group">
+                <label for="nombre_cliente">Nombre del Cliente:</label>
+                <input type="text" id="nombre_cliente" name="nombre_cliente" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email_cliente">Email del Cliente:</label>
+                <input type="email" id="email_cliente" name="email_cliente" required>
+            </div>
+
+            <div class="form-group">
+                <label for="imageFile">Imagen del Ticket:</label>
+                <div class="file-input image-input" onclick="document.getElementById('imageFile').click()">
+                    <input type="file" id="imageFile" name="imageFile" accept="image/*" style="display: none;"
+                        onchange="showImageInfo()">
+                    <div id="imageText">📷 Haz clic aquí para seleccionar la imagen del ticket</div>
+                </div>
+                <div id="imageInfo" class="file-info" style="display: none;"></div>
+                <img id="imagePreview" class="image-preview" style="display: none;" alt="Vista previa de la imagen">
+            </div>
+
+            <div class="form-group">
+                <label for="numero_ticket">Número de Ticket:</label>
+                <input type="text" id="numero_ticket" name="numero_ticket" required>
+            </div>
+
+            <!-- Campo oculto para fecha y hora -->
+            <input type="hidden" id="fecha_y_hora" name="fecha_y_hora">
+
+            <div class="form-group">
+                <label for="audioFile">Archivo de Audio:</label>
+                <div class="file-input" onclick="document.getElementById('audioFile').click()">
+                    <input type="file" id="audioFile" name="audioFile" accept="audio/*" style="display: none;"
+                        onchange="showFileInfo()">
+                    <div id="fileText">🎵 Haz clic aquí para seleccionar un archivo de audio</div>
+                </div>
+                <div id="fileInfo" class="file-info" style="display: none;"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="opinion_texto">Su Opinión:</label>
+                <textarea id="opinion_texto" name="opinion_texto" rows="4"
+                    style="width: 100%; padding: 10px; border: 2px solid #ddd; border-radius: 5px; font-size: 16px; resize: vertical; font-family: Arial, sans-serif;"
+                    placeholder="Escriba aquí su opinión sobre el servicio recibido..."></textarea>
+            </div>
+
+            <button type="submit" id="submitBtn">Enviar Opinión</button>
+        </form>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // Llenar fecha actual por defecto
+        document.addEventListener('DOMContentLoaded', function () {
+            const now = new Date();
+            const localDateTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+                .toISOString()
+                .slice(0, 16);
+            document.getElementById('fecha_y_hora').value = localDateTime;
+        });
+
+        // Función para obtener geolocalización
+        function getCurrentLocation() {
+            return new Promise((resolve, reject) => {
+                if (!navigator.geolocation) {
+                    reject(new Error('Geolocalización no soportada'));
+                    return;
+                }
+
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        resolve({
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude,
+                            accuracy: position.coords.accuracy
+                        });
+                    },
+                    (error) => {
+                        // Si no se puede obtener la ubicación, usar coordenadas por defecto
+                        console.warn('Error obteniendo ubicación:', error.message);
+                        resolve({
+                            lat: -38.0055,  // Mar del Plata, Argentina
+                            lng: -57.5426,
+                            accuracy: null,
+                            note: 'Ubicación por defecto'
+                        });
+                    },
+                    {
+                        timeout: 10000,
+                        enableHighAccuracy: true
+                    }
+                );
+            });
+        }
+
+        // Función para verificar el estado del servidor
+        async function checkServerStatus() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.className = 'result loading';
+            resultDiv.textContent = 'Verificando estado del servidor...';
+
+            try {
+                const response = await fetch('http://localhost:8000/health');
+                if (response.ok) {
+                    const data = await response.json();
+                    resultDiv.className = 'result success';
+                    resultDiv.textContent = `✅ Servidor funcionando correctamente\nEstado: ${data.status}\nTimestamp: ${data.timestamp}`;
+                } else {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Error conectando con el servidor:\n${error.message}\n\nAsegúrate de que el backend esté ejecutándose en http://localhost:8000`;
+            }
+        }
+
+        // Función para llenar datos de prueba
+        function fillTestData() {
+            document.getElementById('nombre_cliente').value = 'Juan Pérez';
+            document.getElementById('email_cliente').value = 'juan.perez@email.com';
+            document.getElementById('numero_ticket').value = 'TICKET-' + Math.floor(Math.random() * 10000);
+            document.getElementById('opinion_texto').value = 'Excelente servicio, la comida estaba deliciosa y el personal muy atento. Definitivamente volveré a visitar el restaurante. La presentación de los platos fue impecable y el ambiente muy acogedor.';
+
+            // La fecha se actualiza automáticamente
+            const now = new Date();
+            const localDateTime = new Date(now.getTime() - now.getTimezoneOffset() * 60000)
+                .toISOString()
+                .slice(0, 16);
+            document.getElementById('fecha_y_hora').value = localDateTime;
+        }
+
+        // Función para mostrar información del archivo de audio
+        function showFileInfo() {
+            const fileInput = document.getElementById('audioFile');
+            const fileInfo = document.getElementById('fileInfo');
+            const fileText = document.getElementById('fileText');
+
+            if (fileInput.files.length > 0) {
+                const file = fileInput.files[0];
+                fileText.textContent = `Archivo seleccionado: ${file.name}`;
+                fileInfo.style.display = 'block';
+                fileInfo.innerHTML = `
+                    <strong>Información del archivo de audio:</strong><br>
+                    Nombre: ${file.name}<br>
+                    Tipo: ${file.type}<br>
+                    Tamaño: ${(file.size / 1024 / 1024).toFixed(2)} MB<br>
+                    Última modificación: ${new Date(file.lastModified).toLocaleString()}
+                `;
+            } else {
+                fileText.textContent = '🎵 Haz clic aquí para seleccionar un archivo de audio';
+                fileInfo.style.display = 'none';
+            }
+        }
+
+        // Función para mostrar información de la imagen
+        function showImageInfo() {
+            const imageInput = document.getElementById('imageFile');
+            const imageInfo = document.getElementById('imageInfo');
+            const imageText = document.getElementById('imageText');
+            const imagePreview = document.getElementById('imagePreview');
+
+            if (imageInput.files.length > 0) {
+                const file = imageInput.files[0];
+                imageText.textContent = `Imagen seleccionada: ${file.name}`;
+                imageInfo.style.display = 'block';
+                imageInfo.innerHTML = `
+                    <strong>Información de la imagen:</strong><br>
+                    Nombre: ${file.name}<br>
+                    Tipo: ${file.type}<br>
+                    Tamaño: ${(file.size / 1024 / 1024).toFixed(2)} MB<br>
+                    Última modificación: ${new Date(file.lastModified).toLocaleString()}
+                `;
+
+                // Mostrar vista previa de la imagen
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    imagePreview.src = e.target.result;
+                    imagePreview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                imageText.textContent = '📷 Haz clic aquí para seleccionar la imagen del ticket';
+                imageInfo.style.display = 'none';
+                imagePreview.style.display = 'none';
+            }
+        }
+
+        // Función principal de upload
+        async function uploadAudio(audioFile, imageFile, metadata) {
+            if (!audioFile) {
+                throw new Error("El archivo de audio es requerido");
+            }
+
+            if (!audioFile.type.startsWith("audio/")) {
+                throw new Error("Solo se permiten archivos de audio");
+            }
+
+            // Validar imagen si se proporciona
+            if (imageFile && !imageFile.type.startsWith("image/")) {
+                throw new Error("Solo se permiten archivos de imagen para el ticket");
+            }
+
+            const formData = new FormData();
+
+            // Agregar metadatos
+            formData.append("nombre_cliente", metadata.nombre_cliente);
+            formData.append("email_cliente", metadata.email_cliente);
+            formData.append("nombre_comercio", metadata.nombre_comercio);
+            formData.append("numero_ticket", metadata.numero_ticket);
+            formData.append("fecha_y_hora", metadata.fecha_y_hora || new Date().toISOString());
+            formData.append("geolocalizacion", JSON.stringify(metadata.geolocalizacion));
+            formData.append("opinion_texto", metadata.opinion_texto || "");
+            formData.append("audio", audioFile);
+
+            // Agregar imagen si existe
+            if (imageFile) {
+                formData.append("imagen_ticket", imageFile);
+            }
+
+            try {
+                const response = await fetch("http://localhost:8000/api/upload-audio", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                if (!response.ok) {
+                    const errorData = await response.json().catch(() => ({}));
+                    throw new Error(
+                        errorData.detail || `HTTP error! status: ${response.status}`
+                    );
+                }
+
+                return await response.json();
+            } catch (error) {
+                console.error("Error uploading audio:", error);
+                throw error;
+            }
+        }
+
+        // Event listener para el formulario
+        document.getElementById('audioForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const submitBtn = document.getElementById('submitBtn');
+            const resultDiv = document.getElementById('result');
+
+            // Desactivar botón y mostrar estado de carga
+            submitBtn.disabled = true;
+            submitBtn.textContent = 'Enviando...';
+            resultDiv.className = 'result loading';
+            resultDiv.textContent = 'Procesando archivos...';
+
+            try {
+                // Obtener datos del formulario
+                const audioFile = document.getElementById('audioFile').files[0];
+                const imageFile = document.getElementById('imageFile').files[0]; // Nuevo campo
+
+                if (!audioFile) {
+                    throw new Error('Por favor selecciona un archivo de audio');
+                }
+
+                // Obtener geolocalización
+                resultDiv.textContent = 'Obteniendo ubicación...';
+                const geolocalizacion = await getCurrentLocation();
+
+                // Preparar metadatos
+                const metadata = {
+                    nombre_cliente: document.getElementById('nombre_cliente').value,
+                    email_cliente: document.getElementById('email_cliente').value,
+                    nombre_comercio: document.getElementById('nombre_comercio').value,
+                    numero_ticket: document.getElementById('numero_ticket').value,
+                    fecha_y_hora: document.getElementById('fecha_y_hora').value,
+                    opinion_texto: document.getElementById('opinion_texto').value,
+                    geolocalizacion: geolocalizacion
+                };
+
+                // Debug: mostrar qué se está enviando
+                console.log('Metadatos a enviar:', metadata);
+                console.log('Audio:', audioFile ? audioFile.name : 'No seleccionado');
+                console.log('Imagen:', imageFile ? imageFile.name : 'No seleccionada');
+
+                // Subir archivos
+                resultDiv.textContent = 'Subiendo archivos al servidor...';
+                const result = await uploadAudio(audioFile, imageFile, metadata);
+
+                // Mostrar resultado exitoso
+                resultDiv.className = 'result success';
+                resultDiv.textContent = `✅ ¡Archivos subidos exitosamente!
+
+Detalles de la respuesta:
+${JSON.stringify(result, null, 2)}
+
+Archivos enviados:
+- Audio: ${audioFile.name}
+- Imagen: ${imageFile ? imageFile.name : 'No seleccionada'}
+
+Metadatos enviados:
+${JSON.stringify(metadata, null, 2)}`;
+
+            } catch (error) {
+                resultDiv.className = 'result error';
+                resultDiv.textContent = `❌ Error al subir los archivos:
+
+${error.message}
+
+Sugerencias:
+• Verifica que el servidor backend esté ejecutándose
+• Asegúrate de que el archivo de audio sea válido
+• Si seleccionaste una imagen, verifica que sea un formato válido
+• Revisa que todos los campos estén completos
+• Verifica la conexión a internet para la geolocalización`;
+                console.error('Upload error:', error);
+            } finally {
+                // Reactivar botón
+                submitBtn.disabled = false;
+                submitBtn.textContent = 'Enviar Opinión';
+            }
+        });
+    </script>
+</body>
+
+</html>
