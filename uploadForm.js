@@ -29,9 +29,8 @@ document.addEventListener('DOMContentLoaded', function () {
             prizeButton.className = 'btn fw-bold mb-3';
             prizeButton.textContent = 'I changed my mind, I want the prize!';
             prizeButton.onclick = function() {
-                // Redirect to the full form by removing the 'mode' parameter
-                const newUrl = window.location.pathname;
-                window.location.href = newUrl;
+                // Redirect to the login page to start the prize flow
+                window.location.href = 'login.html';
             };
             prizePromptContainer.appendChild(prizeButton);
         }
