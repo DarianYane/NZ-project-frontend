@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login / Register</title>
+    <script src="https://accounts.google.com/gsi/client" async defer></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: red;
+            color: white;
+        }
+        .logo-placeholder {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #ffdd57;
+            margin-bottom: 2rem;
+        }
+        .footer {
+            padding: 1rem 0;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        .footer .brand {
+            font-weight: bold;
+            font-size: 1.2em;
+            color: #ffffff;
+        }
+        .form-container {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 2rem;
+            border-radius: 0.5rem;
+        }
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.3);
+            color: white;
+        }
+        .form-control::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.2);
+            border-color: #ffdd57;
+            color: white;
+            box-shadow: 0 0 0 0.25rem rgba(255, 221, 87, 0.25);
+        }
+        .google-btn {
+            background-color: #fff;
+            color: #757575;
+            border: 1px solid #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        .google-btn img {
+            width: 20px;
+            margin-right: 10px;
+        }
+        .toggle-link {
+            color: #ffdd57;
+            cursor: pointer;
+            text-decoration: none;
+        }
+        .toggle-link:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="d-flex flex-column vh-100">
+        <header class="text-center pt-4">
+            <div class="logo-placeholder">Your Logo</div>
+        </header>
+        <main class="flex-grow-1 container d-flex flex-column justify-content-center align-items-center">
+            <div class="col-11 col-sm-10 col-md-8 col-lg-6 col-xl-5">
+                <!-- Login Form -->
+                <div id="login-form" class="form-container">
+                    <h3 class="text-center mb-4">Login</h3>
+                    <form action="form.html">
+                        <div class="mb-3">
+                            <label for="loginEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="loginEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" placeholder="Enter your password" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-warning fw-bold">Login</button>
+                        </div>
+                        <div class="text-center my-3">or</div>
+                        <div id="g_id_signin" class="d-flex justify-content-center"></div>
+                        <div class="text-center mt-4">
+                            Don't have an account? <a href="#" id="show-signup" class="toggle-link">Sign up</a>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Signup Form -->
+                <div id="signup-form" class="form-container" style="display: none;">
+                    <h3 class="text-center mb-4">Sign Up</h3>
+                    <form action="form.html">
+                        <div class="mb-3">
+                            <label for="signupName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="signupName" placeholder="Enter your full name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="signupEmail" placeholder="Enter your email" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signupPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signupPassword" placeholder="Create a password" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-warning fw-bold">Create Account</button>
+                        </div>
+                        <div class="text-center mt-4">
+                            Already have an account? <a href="#" id="show-login" class="toggle-link">Log in</a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+        <footer class="footer text-center">
+            powered by <span class="brand">FeedCounts</span>
+        </footer>
+    </div>
+    
+    <script src="config.js"></script>
+    <script>
+        function handleCredentialResponse(response) {
+            // The ID token is what you'd send to your backend.
+            const id_token = response.credential;
+            console.log("Google ID Token:", id_token);
+
+            // For now, we'll simulate a successful login and redirect.
+            // In a real app, you would send this token to your backend for verification,
+            // and the backend would return a session token.
+            alert("Frontend-only login successful! Redirecting...");
+            window.location.href = 'form.html';
+        }
+
+        window.onload = function () {
+            google.accounts.id.initialize({
+                client_id: GOOGLE_CLIENT_ID, // This variable is now loaded from config.js
+                callback: handleCredentialResponse
+            });
+
+            google.accounts.id.renderButton(
+                document.getElementById("g_id_signin"),
+                { theme: "outline", size: "large", width: "100%" } // Customization options
+            );
+
+            // Also display the One Tap prompt
+            google.accounts.id.prompt(); 
+        };
+
+        document.getElementById('show-signup').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('login-form').style.display = 'none';
+            document.getElementById('signup-form').style.display = 'block';
+        });
+
+        document.getElementById('show-login').addEventListener('click', function(e) {
+            e.preventDefault();
+            document.getElementById('signup-form').style.display = 'none';
+            document.getElementById('login-form').style.display = 'block';
+        });
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
