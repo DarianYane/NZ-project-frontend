@@ -20,21 +20,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
             ticketNumberInput.required = false;
         }
-
-        // Create and add the "I want the prize" button
-        const prizePromptContainer = document.getElementById('prize-prompt-container');
-        if (prizePromptContainer) {
-            const prizeButton = document.createElement('button');
-            prizeButton.id = 'claimPrizeButton';
-            prizeButton.className = 'btn fw-bold mb-3';
-            prizeButton.textContent = 'I changed my mind, I want the prize!';
-            prizeButton.onclick = function() {
-                // Redirect to the full form by removing the 'mode' parameter
-                const newUrl = window.location.pathname;
-                window.location.href = newUrl;
-            };
-            prizePromptContainer.appendChild(prizeButton);
-        }
     }
 
     // Set the current date and time in the hidden field
