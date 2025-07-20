@@ -65,6 +65,23 @@
         .text-form-container {
             width: 100%;
         }
+        #submitTextOpinion {
+            width: 80%;
+            padding-top: 0.825rem;
+            padding-bottom: 0.825rem;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        #claimPrizeButton {
+            width: 72%; /* 10% narrower than 80% */
+            padding-top: 0.9075rem; /* 10% taller than 0.825rem */
+            padding-bottom: 0.9075rem;
+            margin-left: auto;
+            margin-right: auto;
+            background: linear-gradient(45deg, #6a11cb 0%, #2575fc 100%);
+            color: white;
+            border: none;
+        }
     </style>
 </head>
 <body>
@@ -84,9 +101,10 @@
                     <a href="#" id="showTextFormLink" class="text-form-link">Can't record now? Write your opinion instead.</a>
                     <div id="textForm" style="display: none;" class="text-form-container">
                         <textarea id="opinionText" class="form-control mt-3" rows="5" placeholder="Write your opinion here..."></textarea>
-                        <div class="d-grid mt-3">
-                            <button id="submitTextOpinion" class="btn btn-warning fw-bold">Submit Opinion</button>
-                        </div>
+                    </div>
+                    <div id="prize-prompt-container" class="d-grid mt-3"></div>
+                    <div class="d-grid mt-3">
+                        <button id="submitTextOpinion" class="btn btn-warning fw-bold">Submit Opinion</button>
                     </div>
                 </div>
             </div>
