@@ -19,7 +19,7 @@ document.addEventListener('DOMContentLoaded', function () {
     selectFileButton.addEventListener('click', () => fileInput.click());
     backButton.addEventListener('click', (e) => {
         e.preventDefault();
-        window.location.href = `form_step1.html?mode=${mode || ''}`;
+        window.location.href = `${APP_CONFIG.pages.uploadOpinion}?mode=${mode || ''}`;
     });
 
     cameraInput.addEventListener('change', () => showImageInfo(cameraInput));
@@ -31,18 +31,21 @@ document.addEventListener('DOMContentLoaded', function () {
             alert('Please upload a ticket image to receive your prize.');
             return;
         }
-        // In a real scenario, you would retrieve the stored audio data
-        // and submit both the audio and the ticket image to the server.
-        alert('Submitting opinion and ticket...');
-        // uploadFiles(storedAudio, imageFile, metadata);
+
+        if (imageFile) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                localStorage.setItem('ticketImage', e.target.result);
+                window.location.href = APP_CONFIG.pages.verification;
+            };
+            reader.readAsDataURL(imageFile);
+        } else {
+            localStorage.removeItem('ticketImage');
+            window.location.href = APP_CONFIG.pages.verification;
+        }
     });
 
-    skipButton.addEventListener('click', () => {
-        alert('Submitting opinion without ticket...');
-        // In a real scenario, you would retrieve the stored audio data
-        // and submit it to the server without a ticket image.
-        // uploadFiles(storedAudio, null, metadata);
-    });
+    
 });
 
 function showImageInfo() {
