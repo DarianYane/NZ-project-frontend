@@ -111,16 +111,23 @@
     
     <script src="config.js"></script>
     <script src="upload_ticket.js"></script>
-    <script>
-        document.getElementById('submitButton').addEventListener('click', function() {
-            window.location.href = APP_CONFIG.pages.verification;
-        });
-
-        document.getElementById('backButton').addEventListener('click', function(e) {
-            e.preventDefault();
-            window.location.href = APP_CONFIG.pages.uploadOpinion;
-        });
-    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Modal -->
+    <div class="modal fade" id="imageRequiredModal" tabindex="-1" aria-labelledby="imageRequiredModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: #b20000; color: white;">
+                <div class="modal-header" style="border-bottom: none;">
+                    <h5 class="modal-title w-100 text-center" id="imageRequiredModalLabel">Image Required</h5>
+                </div>
+                <div class="modal-body text-center">
+                    Please upload a ticket image to receive your prize.
+                </div>
+                <div class="modal-footer" style="border-top: none; justify-content: center;">
+                    <button type="button" class="btn btn-light" data-bs-dismiss="modal">Understood</button>
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

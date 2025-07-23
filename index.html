@@ -49,6 +49,12 @@
     </div>
     <script src="config.js"></script>
     <script>
+        // Clear local storage on page load for a fresh start
+        localStorage.removeItem('ticketImage');
+        localStorage.removeItem('opinion');
+        localStorage.removeItem('audio');
+    </script>
+    <script>
         document.getElementById('opinionLink').href = `${APP_CONFIG.pages.uploadOpinion}?mode=opinion_only`;
         document.getElementById('loginLink').href = APP_CONFIG.pages.login;
     </script>
