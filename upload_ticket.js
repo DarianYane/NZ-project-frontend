@@ -39,12 +39,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const reader = new FileReader();
             reader.onload = function(e) {
                 localStorage.setItem('ticketImage', e.target.result);
-                window.location.href = APP_CONFIG.pages.verification;
+                window.location.href = `${APP_CONFIG.pages.verification}?mode=${mode || ''}`;
             };
             reader.readAsDataURL(imageFile);
         } else {
             localStorage.removeItem('ticketImage');
-            window.location.href = APP_CONFIG.pages.verification;
+            window.location.href = `${APP_CONFIG.pages.verification}?mode=${mode || ''}`;
         }
     });
 

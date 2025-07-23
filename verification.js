@@ -37,12 +37,23 @@ document.addEventListener('DOMContentLoaded', function () {
         ticketImagePreview.alt = ''; // Explicitly set alt to empty string
     }
 
+    const urlParams = new URLSearchParams(window.location.search);
+    const mode = urlParams.get('mode');
+
     editOpinionButton.addEventListener('click', () => {
-        window.location.href = APP_CONFIG.pages.uploadOpinion;
+        let targetUrl = APP_CONFIG.pages.uploadOpinion;
+        if (mode) {
+            targetUrl += `?mode=${mode}`;
+        }
+        window.location.href = targetUrl;
     });
 
     editTicketButton.addEventListener('click', () => {
-        window.location.href = APP_CONFIG.pages.uploadTicket;
+        let targetUrl = APP_CONFIG.pages.uploadTicket;
+        if (mode) {
+            targetUrl += `?mode=${mode}`;
+        }
+        window.location.href = targetUrl;
     });
 
     submitButton.addEventListener('click', () => {
