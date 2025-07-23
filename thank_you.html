@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -10,33 +11,49 @@
             background-color: red;
             color: white;
         }
+
         .logo-placeholder {
             font-size: 2.5rem;
             font-weight: bold;
             color: #ffdd57;
             margin-bottom: 2rem;
         }
+
         .footer {
             padding: 1rem 0;
             color: rgba(255, 255, 255, 0.8);
         }
+
         .footer .brand {
             font-weight: bold;
             font-size: 1.2em;
             color: #ffffff;
         }
+
         .verification-container {
             background-color: rgba(0, 0, 0, 0.2);
             padding: 3rem;
             border-radius: 0.5rem;
             text-align: center;
         }
+
         .verification-icon {
             font-size: 4rem;
             color: #28a745;
         }
+
+        .text-link {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+        }
+
+        .text-link:hover {
+            color: white;
+            text-decoration: underline;
+        }
     </style>
 </head>
+
 <body>
     <div class="d-flex flex-column vh-100">
         <header class="text-center pt-4">
@@ -46,14 +63,19 @@
             <div class="col-11 col-md-8 col-lg-6">
                 <div class="verification-container">
                     <div class="verification-icon mb-3" style="font-size: 6rem;">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="currentColor" class="bi bi-check-circle-fill" viewBox="0 0 16 16">
-                            <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z"/>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="96" height="96" fill="currentColor"
+                            class="bi bi-check-circle-fill" viewBox="0 0 16 16">
+                            <path
+                                d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zm-3.97-3.03a.75.75 0 0 0-1.08.022L7.477 9.417 5.384 7.323a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-.01-1.05z" />
                         </svg>
                     </div>
                     <h2 class="h2 mb-3">Thank you for your feedback!</h2>
                     <p>Your opinion has been successfully submitted.</p>
-                    
-                    
+
+
+                </div>
+                <div class="text-center mt-4">
+                    <a href="#" id="visitWebsiteLink" class="text-link">Click here to visit YourLogo site</a>
                 </div>
             </div>
         </main>
@@ -62,7 +84,10 @@
         </footer>
     </div>
     <script src="config.js"></script>
-    
+    <script>
+        document.getElementById('visitWebsiteLink').href = APP_CONFIG.pages.home;
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+
 </html>

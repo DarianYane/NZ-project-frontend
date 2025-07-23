@@ -11,6 +11,9 @@ document.addEventListener('DOMContentLoaded', function () {
     const submitButton = document.getElementById('submitButton');
     const step2Title = document.getElementById('step2-title');
 
+    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+    const ticketImagePreview = document.getElementById('ticketImagePreview');
+
     if (mode === 'opinion_only') {
         step2Title.textContent = 'If you wish, you can optionally attach your ticket to help the business.';
     }
@@ -22,8 +25,8 @@ document.addEventListener('DOMContentLoaded', function () {
         window.location.href = `${APP_CONFIG.pages.uploadOpinion}?mode=${mode || ''}`;
     });
 
-    cameraInput.addEventListener('change', () => showImageInfo(cameraInput));
-    fileInput.addEventListener('change', () => showImageInfo(fileInput));
+    cameraInput.addEventListener('change', () => handleImageSelection(cameraInput));
+    fileInput.addEventListener('change', () => handleImageSelection(fileInput));
 
     submitButton.addEventListener('click', () => {
         const imageFile = cameraInput.files[0] || fileInput.files[0];
@@ -45,26 +48,30 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    
+    // Check if there's a stored image on page load and display it
+    const storedTicketImage = localStorage.getItem('ticketImage');
+    if (storedTicketImage) {
+        ticketImagePreview.src = storedTicketImage;
+        imagePreviewContainer.style.display = 'block';
+    } else {
+        imagePreviewContainer.style.display = 'none';
+    }
 });
 
-function showImageInfo() {
-    const imageInput = document.getElementById('ticketImage');
-    const imageInfo = document.getElementById('ticketImageInfo');
-    const imagePreview = document.getElementById('ticketImagePreview');
-    if (imageInput.files.length > 0) {
-        const file = imageInput.files[0];
-        imageInfo.style.display = 'block';
-        imageInfo.innerHTML = `Name: ${file.name}, Size: ${(file.size / 1024 / 1024).toFixed(2)} MB`;
-        
+function handleImageSelection(input) {
+    const imagePreviewContainer = document.getElementById('imagePreviewContainer');
+    const ticketImagePreview = document.getElementById('ticketImagePreview');
+
+    if (input.files.length > 0) {
+        const file = input.files[0];
         const reader = new FileReader();
         reader.onload = (e) => {
-            imagePreview.src = e.target.result;
-            imagePreview.style.display = 'block';
+            ticketImagePreview.src = e.target.result;
+            imagePreviewContainer.style.display = 'block';
         };
         reader.readAsDataURL(file);
     } else {
-        imageInfo.style.display = 'none';
-        imagePreview.style.display = 'none';
+        ticketImagePreview.src = ''; // Clear image
+        imagePreviewContainer.style.display = 'none';
     }
 }

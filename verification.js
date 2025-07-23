@@ -31,10 +31,10 @@ document.addEventListener('DOMContentLoaded', function () {
         noTicketImageMessage.style.display = 'none';
         ticketImagePreview.alt = 'Ticket Preview';
     } else {
-        ticketImagePreview.removeAttribute('src'); // Remove src attribute entirely
+        ticketImagePreview.src = ''; // Explicitly set src to empty string
         ticketImagePreview.style.display = 'none';
         noTicketImageMessage.style.display = 'block';
-        ticketImagePreview.removeAttribute('alt'); // Remove alt attribute entirely
+        ticketImagePreview.alt = ''; // Explicitly set alt to empty string
     }
 
     editOpinionButton.addEventListener('click', () => {
