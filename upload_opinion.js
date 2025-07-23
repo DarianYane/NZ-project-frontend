@@ -109,6 +109,24 @@ document.addEventListener('DOMContentLoaded', function () {
         localStorage.removeItem('audio');
     }
 
+    function loadExistingOpinion() {
+        const storedAudio = localStorage.getItem('audio');
+        const storedOpinion = localStorage.getItem('opinion');
+
+        if (storedAudio) {
+            audioPlayback.src = storedAudio;
+            audioPlayback.style.display = 'block';
+            recordingControls.style.display = 'block';
+            recordButton.style.display = 'none';
+            stopButton.style.display = 'none';
+            deleteButton.style.display = 'inline-block';
+        } else if (storedOpinion) {
+            opinionText.value = storedOpinion;
+            document.getElementById('textForm').style.display = 'block';
+            document.getElementById('showTextFormLink').style.display = 'none';
+        }
+    }
+
     nextButton.addEventListener('click', () => {
         const opinionValue = opinionText.value.trim();
         const audioSaved = localStorage.getItem('audio');
@@ -123,4 +141,7 @@ document.addEventListener('DOMContentLoaded', function () {
         
         window.location.href = `${APP_CONFIG.pages.uploadTicket}?mode=${mode || ''}`;
     });
+
+    // Load any existing opinion when the page loads
+    loadExistingOpinion();
 });
