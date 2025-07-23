@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', function () {
             prizeButton.textContent = 'I changed my mind, I want the prize!';
             prizeButton.onclick = function() {
                 // Redirect to the login page to start the prize flow
-                window.location.href = 'login.html';
+                window.location.href = APP_CONFIG.pages.login;
             };
             prizePromptContainer.appendChild(prizeButton);
         }
@@ -28,6 +28,6 @@ document.addEventListener('DOMContentLoaded', function () {
         // For now, we'll just store the text.
         localStorage.setItem('opinion', opinionText);
         
-        window.location.href = `form_step2.html?mode=${mode || ''}`;
+        window.location.href = `${APP_CONFIG.pages.uploadTicket}?mode=${mode || ''}`;
     });
 });

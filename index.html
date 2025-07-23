@@ -38,8 +38,8 @@
                 <div class="logo-placeholder">Your Logo</div>
                 <h2 class="mb-4">Want to share your opinion and get a reward?</h2>
                 <div class="d-grid gap-3 px-md-5"> 
-                    <a href="form_step1.html?mode=opinion_only" class="btn btn-outline-light btn-lg btn-custom-height">Just Give Opinion</a>
-                    <a href="login.html" class="btn btn-warning btn-lg fw-bold btn-custom-height">Opinion & My Prize!</a>
+                    <a id="opinionLink" href="#" class="btn btn-outline-light btn-lg btn-custom-height">Just Give Opinion</a>
+                    <a id="loginLink" href="#" class="btn btn-warning btn-lg fw-bold btn-custom-height">Opinion & My Prize!</a>
                 </div>
             </div>
         </main>
@@ -47,6 +47,11 @@
             powered by <span class="brand">FeedCounts</span>
         </footer>
     </div>
+    <script src="config.js"></script>
+    <script>
+        document.getElementById('opinionLink').href = `${APP_CONFIG.pages.uploadOpinion}?mode=opinion_only`;
+        document.getElementById('loginLink').href = APP_CONFIG.pages.login;
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
