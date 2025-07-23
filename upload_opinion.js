@@ -110,11 +110,16 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     nextButton.addEventListener('click', () => {
-        const opinionValue = opinionText.value;
+        const opinionValue = opinionText.value.trim();
+        const audioSaved = localStorage.getItem('audio');
+
+        if (!opinionValue && !audioSaved) {
+            const modal = new bootstrap.Modal(document.getElementById('opinionRequiredModal'));
+            modal.show();
+            return;
+        }
+
         localStorage.setItem('opinion', opinionValue);
-        
-        // The audio is already saved to localStorage when recording stops.
-        // If no audio was recorded, this will just proceed.
         
         window.location.href = `${APP_CONFIG.pages.uploadTicket}?mode=${mode || ''}`;
     });
