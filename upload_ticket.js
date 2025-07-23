@@ -31,7 +31,8 @@ document.addEventListener('DOMContentLoaded', function () {
     submitButton.addEventListener('click', () => {
         const imageFile = cameraInput.files[0] || fileInput.files[0];
         if (!imageFile && mode !== 'opinion_only') {
-            alert('Please upload a ticket image to receive your prize.');
+            const modal = new bootstrap.Modal(document.getElementById('imageRequiredModal'));
+            modal.show();
             return;
         }
 

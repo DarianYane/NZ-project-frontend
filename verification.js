@@ -29,12 +29,12 @@ document.addEventListener('DOMContentLoaded', function () {
         ticketImagePreview.src = storedTicketImage;
         ticketImagePreview.style.display = 'block';
         noTicketImageMessage.style.display = 'none';
-        ticketImagePreview.alt = 'Ticket Preview';
     } else {
-        ticketImagePreview.src = ''; // Explicitly set src to empty string
-        ticketImagePreview.style.display = 'none';
-        noTicketImageMessage.style.display = 'block';
-        ticketImagePreview.alt = ''; // Explicitly set alt to empty string
+        // If there is no ticket image, hide the entire ticket section
+        const ticketSection = document.querySelector('.verification-section:nth-of-type(2)');
+        if (ticketSection) {
+            ticketSection.style.display = 'none';
+        }
     }
 
     const urlParams = new URLSearchParams(window.location.search);
