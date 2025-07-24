@@ -72,6 +72,35 @@
             margin-left: auto;
             margin-right: auto;
         }
+        #nextButton {
+            width: 72%;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .recording-status {
+            background-color: white;
+            color: black;
+            border-radius: 20px;
+            padding: 10px 24px;
+            display: inline-block;
+            margin-bottom: 15px;
+        }
+        #stopButton svg {
+            width: 80%;
+            height: 80%;
+        }
+        #deleteButton {
+            transform: scale(0.7);
+        }
+        #stopButton {
+            background-color: white;
+            border-color: white;
+        }
+        #stopButton svg,
+        #deleteButton svg {
+            width: 48px;
+            height: 48px;
+        }
         #claimPrizeButton {
             width: 72%; /* 10% narrower than 80% */
             padding-top: 0.9075rem; /* 10% taller than 0.825rem */
@@ -92,27 +121,27 @@
         <main class="flex-grow-1 container d-flex justify-content-center align-items-center">
             
             <div class="text-center col-11 col-md-8 col-lg-6">
-                <p class="h5 mb-3 opinion-prompt">Record your opinion<br>about <span class="logo-style">Your Logo</span> now</p>
+                <p class="h5 mb-5 opinion-prompt">Record your opinion<br>about <span class="logo-style">Your Logo</span> now</p>
                 <div id="recordButton" class="record-button">
                     <svg viewBox="0 0 384 512"><path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h144c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"/></svg>
                 </div>
 
                 <div id="recordingControls" style="display: none;" class="mt-3 text-center">
-                    <p><span id="recordingIndicator" class="spinner-grow spinner-grow-sm text-danger" role="status" aria-hidden="true"></span> Recording... <span id="timer">00:00</span></p>
+                    <p class="recording-status"><span id="recordingIndicator" class="spinner-grow spinner-grow-sm text-danger" role="status" aria-hidden="true"></span> Recording... <span id="timer">00:00</span></p>
                     <audio id="audioPlayback" controls style="display: none; margin: 0 auto;"></audio>
-                    <div class="d-flex justify-content-center mt-2">
-                        <button id="stopButton" class="btn btn-danger me-2">Stop</button>
-                        <button id="deleteButton" class="btn btn-secondary" style="display: none;">Delete</button>
+                    <div class="d-flex justify-content-center mt-4">
+                        <button id="stopButton" class="btn btn-danger me-2"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="red"><path d="M6 6h12v12H6z"></path></svg></button>
+                        <button id="deleteButton" class="btn btn-secondary ms-3" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
                     </div>
                 </div>
                 
-                <div id="textEntryContainer" class="mt-4">
-                    <a href="#" id="showTextFormLink" class="text-form-link">Can't record now? Write your opinion instead.</a>
+                <div id="textEntryContainer" class="mt-5">
+                    <a href="#" id="showTextFormLink" class="text-form-link d-block mb-5">Can't record now? Write your opinion instead.</a>
                     <div id="textForm" style="display: none;" class="text-form-container">
                         <textarea id="opinionText" class="form-control mt-3" rows="5" placeholder="Write your opinion here..."></textarea>
                     </div>
-                    <div id="prize-prompt-container" class="d-grid mt-3"></div>
-                    <div class="d-grid mt-3">
+                    <div id="prize-prompt-container" class="d-grid mt-3 mb-3"></div>
+                    <div class="d-grid mt-3 mb-3">
                         <button id="nextButton" class="btn btn-warning fw-bold">Next</button>
                     </div>
                 </div>

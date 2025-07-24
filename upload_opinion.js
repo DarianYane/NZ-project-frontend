@@ -77,6 +77,7 @@ document.addEventListener('DOMContentLoaded', function () {
     stopButton.addEventListener('click', () => {
         mediaRecorder.stop();
         stopTimer();
+        recordingIndicator.parentElement.style.display = 'none';
     });
 
     deleteButton.addEventListener('click', () => {
