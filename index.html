@@ -8,7 +8,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: red;
+            background: radial-gradient(ellipse at center, #E60023 0%, #B2001A 100%);
             color: white;
         }
 
@@ -36,44 +36,27 @@
             padding-bottom: 0.8rem;
         }
         .mb-custom-large {
-            margin-bottom: 3rem; /* Adjust as needed for more space */
+            margin-bottom: 5rem; /* Adjust as needed for more space */
+        }
+
+                .btn-outline-light:hover,
+        .btn-outline-light:active,
+        .btn-outline-light:focus {
+            background-color: #dc3545 !important;
+            color: white !important;
+            box-shadow: none !important;
         }
     </style>
 </head>
 
 <body>
-    <div class="d-flex flex-column vh-100">
-        <main class="flex-grow-1 container d-flex justify-content-center align-items-center">
-            <div class="text-center col-11 col-sm-8 col-md-6">
-                <div class="px-md-5 mb-3">
-                    <h4 class="text-white w-50 mx-auto">Leave us your opinion on your last experience at</h4>
-                </div>
-                <div class="logo-placeholder">Your Logo</div>
-                <p class="text-white-50 mb-custom-large">Point of sale address</p>
-                <h2 class="mb-4">Want to share your opinion and get a reward?</h2>
-                <div class="d-grid gap-3 px-md-5">
-                    <a id="opinionLink" href="#" class="btn btn-outline-light btn-lg btn-custom-height">Just Give
-                        Opinion</a>
-                    <a id="loginLink" href="#" class="btn btn-warning btn-lg fw-bold btn-custom-height">Opinion & My
-                        Prize!</a>
-                </div>
-            </div>
-        </main>
-        <footer class="footer text-center">
-            powered by <span class="brand">FeedCounts</span>
-        </footer>
-    </div>
+    <div id="root"></div>
+
+    <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
     <script src="config.js"></script>
-    <script>
-        // Clear local storage on page load for a fresh start
-        localStorage.removeItem('ticketImage');
-        localStorage.removeItem('opinion');
-        localStorage.removeItem('audio');
-    </script>
-    <script>
-        document.getElementById('opinionLink').href = `${APP_CONFIG.pages.uploadOpinion}?mode=opinion_only`;
-        document.getElementById('loginLink').href = APP_CONFIG.pages.login;
-    </script>
+    <script type="text/babel" src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
