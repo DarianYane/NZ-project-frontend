@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,24 +8,36 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: red;
+            background: radial-gradient(ellipse at center, #E60023 0%, #B2001A 100%);
             color: white;
         }
+
+        .btn-outline-light:hover,
+        .btn-outline-light:active,
+        .btn-outline-light:focus {
+            background-color: #dc3545 !important;
+            color: white !important;
+            box-shadow: none !important;
+        }
+
         .logo-placeholder {
             font-size: 2.5rem;
             font-weight: bold;
             color: #ffdd57;
             margin-bottom: 2rem;
         }
+
         .footer {
             padding: 1rem 0;
             color: rgba(255, 255, 255, 0.8);
         }
+
         .footer .brand {
             font-weight: bold;
             font-size: 1.2em;
             color: #ffffff;
         }
+
         .record-button {
             width: 150px;
             height: 150px;
@@ -36,35 +49,45 @@
             align-items: center;
             cursor: pointer;
             transition: background-color 0.3s, transform 0.2s;
-            margin-left: auto; /* Centering the button */
-            margin-right: auto; /* Centering the button */
+            margin-left: auto;
+            /* Centering the button */
+            margin-right: auto;
+            /* Centering the button */
         }
+
         .record-button:hover {
             background-color: #ffd028;
         }
+
         .record-button:active {
             transform: scale(0.95);
         }
+
         .record-button svg {
             width: 60px;
             height: 60px;
             fill: #333;
         }
+
         .opinion-prompt .logo-style {
             font-weight: bold;
             color: #ffdd57;
         }
+
         .text-form-link {
             color: rgba(255, 255, 255, 0.8);
             text-decoration: none;
         }
+
         .text-form-link:hover {
             color: white;
             text-decoration: underline;
         }
+
         .text-form-container {
             width: 100%;
         }
+
         #submitTextOpinion {
             width: 80%;
             padding-top: 0.825rem;
@@ -72,11 +95,13 @@
             margin-left: auto;
             margin-right: auto;
         }
+
         #nextButton {
             width: 72%;
             margin-left: auto;
             margin-right: auto;
         }
+
         .recording-status {
             background-color: white;
             color: black;
@@ -85,25 +110,32 @@
             display: inline-block;
             margin-bottom: 15px;
         }
+
         #stopButton svg {
             width: 80%;
             height: 80%;
         }
+
         #deleteButton {
             transform: scale(0.7);
         }
+
         #stopButton {
             background-color: white;
             border-color: white;
         }
+
         #stopButton svg,
         #deleteButton svg {
             width: 48px;
             height: 48px;
         }
+
         #claimPrizeButton {
-            width: 72%; /* 10% narrower than 80% */
-            padding-top: 0.9075rem; /* 10% taller than 0.825rem */
+            width: 72%;
+            /* 10% narrower than 80% */
+            padding-top: 0.9075rem;
+            /* 10% taller than 0.825rem */
             padding-bottom: 0.9075rem;
             margin-left: auto;
             margin-right: auto;
@@ -111,38 +143,123 @@
             color: white;
             border: none;
         }
+
+        .btn-attractive {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(45deg, #ff007f, #ff0040);
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-attractive:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .btn-attractive:hover:before {
+            left: 100%;
+        }
+
+        .btn-attractive:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-attractive-yellow {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(45deg, #ffc107, #ffeb3b);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-attractive-yellow:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .btn-attractive-yellow:hover:before {
+            left: 100%;
+        }
+
+        .btn-attractive-yellow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
+
 <body>
     <div class="d-flex flex-column vh-100">
         <header class="text-center pt-4">
             <div class="logo-placeholder">Your Logo</div>
         </header>
         <main class="flex-grow-1 container d-flex justify-content-center align-items-center">
-            
+
             <div class="text-center col-11 col-md-8 col-lg-6">
-                <p class="h5 mb-5 opinion-prompt">Record your opinion<br>about <span class="logo-style">Your Logo</span> now</p>
+                <p class="h5 mb-5 opinion-prompt">Record your opinion<br>about <span class="logo-style">Your Logo</span>
+                    now</p>
                 <div id="recordButton" class="record-button">
-                    <svg viewBox="0 0 384 512"><path d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h144c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z"/></svg>
+                    <svg viewBox="0 0 384 512">
+                        <path
+                            d="M192 0C139 0 96 43 96 96V256c0 53 43 96 96 96s96-43 96-96V96c0-53-43-96-96-96zM64 216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 89.1 66.2 162.7 152 174.4V464H120c-13.3 0-24 10.7-24 24s10.7 24 24 24h144c13.3 0 24-10.7 24-24s-10.7-24-24-24H216V430.4c85.8-11.7 152-85.3 152-174.4V216c0-13.3-10.7-24-24-24s-24 10.7-24 24v40c0 70.7-57.3 128-128 128s-128-57.3-128-128V216z" />
+                    </svg>
                 </div>
 
                 <div id="recordingControls" style="display: none;" class="mt-3 text-center">
-                    <p class="recording-status"><span id="recordingIndicator" class="spinner-grow spinner-grow-sm text-danger" role="status" aria-hidden="true"></span> Recording... <span id="timer">00:00</span></p>
+                    <p class="recording-status"><span id="recordingIndicator"
+                            class="spinner-grow spinner-grow-sm text-danger" role="status" aria-hidden="true"></span>
+                        Recording... <span id="timer">00:00</span></p>
                     <audio id="audioPlayback" controls style="display: none; margin: 0 auto;"></audio>
                     <div class="d-flex justify-content-center mt-4">
-                        <button id="stopButton" class="btn btn-danger me-2"><svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="red"><path d="M6 6h12v12H6z"></path></svg></button>
-                        <button id="deleteButton" class="btn btn-secondary ms-3" style="display: none;"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="white"><path d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z"/></svg></button>
+                        <button id="stopButton" class="btn btn-danger me-2"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="32" height="32" viewBox="0 0 24 24" fill="red">
+                                <path d="M6 6h12v12H6z"></path>
+                            </svg></button>
+                        <button id="deleteButton" class="btn btn-secondary ms-3" style="display: none;"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="white">
+                                <path
+                                    d="M6 19c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2V7H6v12zM19 4h-3.5l-1-1h-5l-1 1H5v2h14V4z" />
+                            </svg></button>
                     </div>
                 </div>
-                
+
                 <div id="textEntryContainer" class="mt-5">
-                    <a href="#" id="showTextFormLink" class="text-form-link d-block mb-5">Can't record now? Write your opinion instead.</a>
+                    <a href="#" id="showTextFormLink" class="text-form-link d-block mb-5">Can't record now? Write your
+                        opinion instead.</a>
                     <div id="textForm" style="display: none;" class="text-form-container">
-                        <textarea id="opinionText" class="form-control mt-3" rows="5" placeholder="Write your opinion here..."></textarea>
+                        <textarea id="opinionText" class="form-control mt-3" rows="5"
+                            placeholder="Write your opinion here..."></textarea>
                     </div>
                     <div id="prize-prompt-container" class="d-grid mt-3 mb-3"></div>
                     <div class="d-grid mt-3 mb-3">
-                        <button id="nextButton" class="btn btn-warning fw-bold">Next</button>
+                        <button id="nextButton" class="btn-attractive-yellow">Next</button>
                     </div>
                 </div>
             </div>
@@ -152,9 +269,9 @@
             powered by <span class="brand">FeedCounts</span>
         </footer>
     </div>
-    
+
     <script>
-        document.getElementById('showTextFormLink').addEventListener('click', function(e) {
+        document.getElementById('showTextFormLink').addEventListener('click', function (e) {
             e.preventDefault();
             this.style.display = 'none';
             document.getElementById('textForm').style.display = 'block';
@@ -165,7 +282,8 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
     <!-- Opinion Required Modal -->
-    <div class="modal fade" id="opinionRequiredModal" tabindex="-1" aria-labelledby="opinionRequiredModalLabel" aria-hidden="true">
+    <div class="modal fade" id="opinionRequiredModal" tabindex="-1" aria-labelledby="opinionRequiredModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content" style="background-color: #b20000; color: white;">
                 <div class="modal-header" style="border-bottom: none;">
@@ -181,4 +299,5 @@
         </div>
     </div>
 </body>
+
 </html>

@@ -7,7 +7,7 @@ document.addEventListener('DOMContentLoaded', function () {
         if (prizePromptContainer) {
             const prizeButton = document.createElement('button');
             prizeButton.id = 'claimPrizeButton';
-            prizeButton.className = 'btn fw-bold mb-3';
+            prizeButton.className = 'btn-attractive';
             prizeButton.textContent = 'I changed my mind, I want the prize!';
             prizeButton.onclick = function() {
                 window.location.href = APP_CONFIG.pages.login;
