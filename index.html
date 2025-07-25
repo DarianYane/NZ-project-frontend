@@ -49,6 +49,48 @@
             font-size: 0.875rem;
             border-radius: 0.2rem;
         }
+
+        /* New styles for attractive buttons */
+        .btn-attractive-base {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-attractive-base:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .btn-attractive-base:hover:before {
+            left: 100%;
+        }
+
+        .btn-attractive-base:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Apply base styles to existing buttons and override specific properties */
+        .btn-outline-light.btn-attractive-base {
+            color: white; /* Ensure text color remains white for outline-light */
+        }
+
+        .btn-warning.btn-attractive-base {
+            color: #000; /* Ensure text color remains black for warning */
+        }
     </style>
 </head>
 

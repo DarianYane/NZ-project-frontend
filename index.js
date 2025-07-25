@@ -25,8 +25,8 @@ const App = () => {
                     <p className="text-white-50 mb-custom-large">Point of sale address</p>
                     <h2 className="mb-4">Want to share your opinion and get a reward?</h2>
                     <div className="d-grid gap-3 px-md-5">
-                        <a id="opinionLink" href="#" onClick={handleOpinionClick} className="btn btn-outline-light btn-lg btn-custom-height">Just Give Opinion</a>
-                        <a id="loginLink" href="#" onClick={handleLoginClick} className="btn btn-warning btn-lg fw-bold btn-custom-height">Opinion & My Prize!</a>
+                        <a id="opinionLink" href="#" onClick={handleOpinionClick} className="btn btn-outline-light btn-lg btn-attractive-base">Just Give Opinion</a>
+                        <a id="loginLink" href="#" onClick={handleLoginClick} className="btn btn-warning btn-lg fw-bold btn-attractive-base">Opinion & My Prize!</a>
                     </div>
                 </div>
             </main>
