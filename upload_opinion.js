@@ -7,6 +7,9 @@ document.addEventListener("DOMContentLoaded", function () {
       "prize-prompt-container"
     );
     if (prizePromptContainer) {
+      const prizeWrapper = document.createElement("div");
+      prizeWrapper.className = "prize-button-wrapper";
+
       const prizeButton = document.createElement("button");
       prizeButton.id = "claimPrizeButton";
       prizeButton.className = "btn-attractive";
@@ -14,7 +17,9 @@ document.addEventListener("DOMContentLoaded", function () {
       prizeButton.onclick = function () {
         window.location.href = APP_CONFIG.pages.login;
       };
-      prizePromptContainer.appendChild(prizeButton);
+
+      prizeWrapper.appendChild(prizeButton);
+      prizePromptContainer.appendChild(prizeWrapper);
     }
   }
 
