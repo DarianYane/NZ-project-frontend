@@ -38,6 +38,8 @@ document.addEventListener("DOMContentLoaded", function () {
   let timerInterval;
   let seconds = 0;
 
+  const glowingWrapper = document.querySelector(".glowing-button-wrapper");
+
   recordButton.addEventListener("click", async () => {
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
       try {
@@ -58,6 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
           deleteButton.style.display = "inline-block";
           stopButton.style.display = "none";
           recordButton.style.display = "none";
+          glowingWrapper.style.display = "none";
 
           // Save audio to localStorage
           const reader = new FileReader();
@@ -72,6 +75,7 @@ document.addEventListener("DOMContentLoaded", function () {
         startTimer();
 
         recordButton.style.display = "none";
+        glowingWrapper.style.display = "none";
         recordingControls.style.display = "block";
         stopButton.style.display = "inline-block";
         deleteButton.style.display = "none";
@@ -118,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
     deleteButton.style.display = "none";
     stopButton.style.display = "inline-block";
     recordButton.style.display = "flex";
+    glowingWrapper.style.display = "flex";
     recordingControls.style.display = "none";
     localStorage.removeItem("audio");
   }
@@ -131,6 +136,7 @@ document.addEventListener("DOMContentLoaded", function () {
       audioPlayback.style.display = "block";
       recordingControls.style.display = "block";
       recordButton.style.display = "none";
+      glowingWrapper.style.display = "none";
       stopButton.style.display = "none";
       deleteButton.style.display = "inline-block";
     } else if (storedOpinion) {
