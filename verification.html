@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
-            background-color: red;
+            background: radial-gradient(ellipse at center, #E60023 0%, #B2001A 100%);
             color: white;
         }
         .logo-placeholder {
@@ -40,6 +40,39 @@
             margin-top: 1rem;
             border-radius: 10px;
         }
+        .btn-attractive-yellow {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 50px;
+            background: linear-gradient(45deg, #ffc107, #ffeb3b);
+            color: #000;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-attractive-yellow:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: all 0.6s ease;
+        }
+
+        .btn-attractive-yellow:hover:before {
+            left: 100%;
+        }
+
+        .btn-attractive-yellow:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        }
     </style>
 </head>
 <body>
@@ -50,7 +83,7 @@
         <main class="flex-grow-1 container d-flex justify-content-center align-items-center">
             <div class="col-11 col-md-8 col-lg-6">
                 <div class="verification-section">
-                    <h3 class="text-center">Your Opinion</h3>
+                    <h3 class="text-center">Are you sure you want to send this opinion?</h3>
                     <div class="d-flex flex-column align-items-center mt-3">
                         <audio id="opinionAudio" controls class="me-2"></audio>
                         <p id="opinionText" class="text-center mt-3"></p>
@@ -62,7 +95,7 @@
                     </div>
                 </div>
                 <div class="verification-section">
-                    <h3 class="text-center">Your Ticket</h3>
+                    <h3 class="text-center">Is this the correct ticket image?</h3>
                     <div class="d-flex flex-column align-items-center">
                         <div class="d-flex flex-column align-items-center">
                         <div class="flex-grow-1 text-center">
@@ -78,7 +111,7 @@
                     </div>
                 </div>
                 <div class="d-grid mt-4">
-                    <button id="submitButton" class="btn btn-warning fw-bold">Submit</button>
+                    <button id="submitButton" class="btn-attractive-yellow">Submit</button>
                 </div>
             </div>
         </main>
