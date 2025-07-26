@@ -35,11 +35,13 @@
             padding-top: 0.8rem;
             padding-bottom: 0.8rem;
         }
+
         .mb-custom-large {
-            margin-bottom: 5rem; /* Adjust as needed for more space */
+            margin-bottom: 5rem;
+            /* Adjust as needed for more space */
         }
 
-                .btn-outline-light:hover {
+        .btn-outline-light:hover {
             background-color: #dc3545 !important;
             color: white !important;
         }
@@ -51,7 +53,7 @@
         }
 
         /* New styles for attractive buttons */
-                .btn-attractive-base {
+        .btn-attractive-base {
             padding: 12px 24px;
             border: none;
             border-radius: 50px;
@@ -85,13 +87,16 @@
 
         /* Apply base styles to existing buttons and override specific properties */
         .btn-outline-light.btn-attractive-base {
-            color: white; /* Ensure text color remains white for outline-light */
+            color: white;
+            /* Ensure text color remains white for outline-light */
             border: 1px solid white;
         }
 
         .btn-warning.btn-attractive-base {
-            color: #000; /* Ensure text color remains black for warning */
-            border: 2px solid #FFFF80; /* Lighter yellow border */
+            color: #000;
+            /* Ensure text color remains black for warning */
+            border: 2px solid #FFFF80;
+            /* Lighter yellow border */
         }
 
         /* New styles for glowing button */
@@ -103,27 +108,34 @@
 
         .glowing-button-wrapper {
             margin: 0 auto;
-            padding: 3px; /* Padding to show the glow */
-            width: 100%; /* Adjust as needed */
-            background: transparent; /* Wrapper background should be transparent to show glow */
+            padding: 3px;
+            /* Padding to show the glow */
+            width: 100%;
+            /* Adjust as needed */
+            background: transparent;
+            /* Wrapper background should be transparent to show glow */
             text-align: center;
-            border-radius: 50px; /* Make it pill-shaped */
+            border-radius: 50px;
+            /* Make it pill-shaped */
             position: relative;
-            overflow: hidden; /* Hide overflow from the glowing effect */
+            overflow: hidden;
+            /* Hide overflow from the glowing effect */
         }
 
-        .glowing-button-wrapper::after, .glowing-button-wrapper::before {
+        .glowing-button-wrapper::after,
+        .glowing-button-wrapper::before {
             content: '';
             position: absolute;
             height: 100%;
             width: 100%;
-            background-image: conic-gradient(from var(--angle), #ff4545, #00ff99, #006aff, #ff0095, #ff4545);
+            background-image: conic-gradient(from var(--angle), #dc3545, #FFFF00, #dc3545);
             top: 50%;
             left: 50%;
             translate: -50% -50%;
             z-index: -1;
-            border-radius: 50px; /* Make it pill-shaped */
-            animation: 3s spin linear infinite;
+            border-radius: 50px;
+            /* Make it pill-shaped */
+            animation: 2s spin linear infinite;
         }
 
         .glowing-button-wrapper::before {
@@ -135,6 +147,7 @@
             from {
                 --angle: 0deg;
             }
+
             to {
                 --angle: 360deg;
             }
@@ -144,13 +157,18 @@
             display: block;
             padding: 12px 24px;
             border: none;
-            border-radius: 10px; /* Match wrapper border-radius */
+            border-radius: 10px;
+            /* Match wrapper border-radius */
             font-weight: bold;
             cursor: pointer;
-            background: #1c1f2b; /* Dark background for the button content */
-            color: #f0f0f0; /* Light text color */
-            font-size: 1.25rem; /* Similar to btn-lg */
-            text-decoration: none; /* For anchor tag */
+            background: #1c1f2b;
+            /* Dark background for the button content */
+            color: #f0f0f0;
+            /* Light text color */
+            font-size: 1.25rem;
+            /* Similar to btn-lg */
+            text-decoration: none;
+            /* For anchor tag */
             transition: all 0.3s ease;
         }
 
