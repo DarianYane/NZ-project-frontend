@@ -14,6 +14,8 @@ const App = () => {
         window.location.href = APP_CONFIG.pages.login;
     };
 
+    
+
     return (
         <div className="d-flex flex-column vh-100">
             <main className="flex-grow-1 container d-flex justify-content-center align-items-center">
@@ -26,7 +28,10 @@ const App = () => {
                     <h2 className="mb-4">Want to share your opinion and get a reward?</h2>
                     <div className="d-grid gap-3 px-md-5">
                         <a id="opinionLink" href="#" onClick={handleOpinionClick} className="btn btn-outline-light btn-lg btn-attractive-base">Just Give Opinion</a>
-                        <a id="loginLink" href="#" onClick={handleLoginClick} className="btn btn-warning btn-lg fw-bold btn-attractive-base">Opinion & My Prize!</a>
+                        <div className="glowing-button-wrapper">
+                            <a id="loginLink" href="#" onClick={handleLoginClick} className="btn btn-warning btn-lg fw-bold btn-attractive-base">Opinion & My Prize!</a>
+                        </div>
+                        
                     </div>
                 </div>
             </main>
