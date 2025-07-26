@@ -173,13 +173,15 @@
 
         window.onload = function () {
             google.accounts.id.initialize({
-                client_id: GOOGLE_CLIENT_ID, // This variable is now loaded from config.js
-                callback: handleCredentialResponse
+                client_id: GOOGLE_CLIENT_ID,
+                callback: handleCredentialResponse,
+                ux_mode: "popup",
+                hl: "en"
             });
 
             google.accounts.id.renderButton(
                 document.getElementById("g_id_signin"),
-                { theme: "outline", size: "large", width: "100%" } // Customization options
+                { theme: "filled_blue", size: "large", text: "signin_with", shape: "pill" } // Customization options
             );
 
             // Also display the One Tap prompt
